@@ -36,3 +36,4 @@
 
 yarn.lock
 /node_modules
+.ruby-version
