@@ -32,7 +32,7 @@ class EnrollmentsController < ApplicationController
 
   def update
     if @enrollment.update(enrollment_params)
-      redirect_to @enrollment, notice: 'Enrollment was successfully updated.'
+      redirect_to enrollments_url, notice: 'Enrollment was successfully updated.'
     else
       @students = Student.all
       @courses = Course.all

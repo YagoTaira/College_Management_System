@@ -1,13 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Students</h1>
+
+<p style="color: green"><%= notice %></p>
 
 <div id="students">
   <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
+    <div>
+      <%= render student %>
+      <%= link_to 'Edit', edit_student_path(student) %> |
+      <%= link_to 'Delete', student, data: { turbo_method: :delete } %>
+    </div>
+    <br>
   <% end %>
 </div>
 
