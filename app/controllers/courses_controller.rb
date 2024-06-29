@@ -22,15 +22,10 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
-
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to course_url(@course), notice: "course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
+    if @course.save
+      redirect_to courses_url, notice: 'Course was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -49,12 +44,8 @@ class CoursesController < ApplicationController
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
-    @course.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: "course was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @course.destroy
+    redirect_to courses_url, notice: 'Course was successfully destroyed.'
   end
 
   private

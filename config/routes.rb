@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   get 'courses/update'
   get 'courses/destroy'
   resources :students
-  resources :courses
+  resources :courses do
+    resources :enrollments
+  end
   resources :enrollments
   resources :grades
   resources :attendances
