@@ -4,7 +4,7 @@ sudo apt -y update && sudo apt -y upgrade
 # Install libraries and dependencies
 sudo apt -y install rbenv tilde libffi-dev libyaml-dev nodejs npm
 # Change directory into folder where application is downloaded
-cd CollegeManagementSystem/
+cd College_Management_System/
 # Bundle install
 bundle install
 # Migrate changes to database
