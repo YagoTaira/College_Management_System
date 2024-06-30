@@ -43,6 +43,6 @@ jobs:
               sudo rm -rf College_Management_System/;
               sudo git clone https://github.com/YagoTaira/College_Management_System.git;
               cd College_Management_System;
-              dos2unix deploy.sh;
+              sudo dos2unix deploy.sh;
               source deploy.sh
             "
