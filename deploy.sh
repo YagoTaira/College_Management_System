@@ -2,13 +2,13 @@
 # Look for updates of available software packages && install libraries
 sudo apt update && sudo apt install rbenv tilde libffi-dev libyaml-dev nodejs npm
 # Initiate rbenv
-rbenv init
+sudo rbenv init
 # Install Ruby 3.3.1 with rbenv
-rbenv install 3.3.1
-rbenv global 3.3.1
-rbenv local 3.3.1
-rbenv rehash
-ruby -v
+sudo rbenv install 3.3.1
+sudo rbenv global 3.3.1
+sudo rbenv local 3.3.1
+sudo rbenv rehash
+sudo ruby -v
 # Update gem system
 sudo gem update --system
 # Install bundler and rails
