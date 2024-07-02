@@ -4,6 +4,7 @@ sudo apt update && sudo apt install -y tilde libffi-dev libyaml-dev nodejs npm r
 # Check Ruby version
 sudo ruby -v
 git -C ~/.rbenv/plugins/ruby-build pull
+sudo rbenv install 3.3.1
 sudo rbenv global 3.3.1
 sudo ruby -v
 # Install bundler and rails
