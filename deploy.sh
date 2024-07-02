@@ -7,8 +7,9 @@ sudo gem install bundler
 sudo gem install rails
 # Bundle install
 bundle install
-# Migrate changes to database
+# Grant access to project directory
 sudo chown -R ubuntu:ubuntu /home/ubuntu/College_Management_System
+# Migrate changes to database
 rails db:migrate
 # Start the server
 sudo /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 80
