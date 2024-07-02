@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Look for updates of available software packages && install libraries
-sudo apt update && sudo apt install rbenv tilde libffi-dev libyaml-dev nodejs npm ruby-dev
+sudo apt update && sudo apt install -y tilde libffi-dev libyaml-dev nodejs npm ruby-dev
 # Check Ruby version
 sudo ruby -v
 # Install bundler and rails
