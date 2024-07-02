@@ -42,9 +42,6 @@ jobs:
             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
               sudo rm -rf College_Management_System/;
               sudo git clone https://github.com/YagoTaira/College_Management_System.git;
-              cd ~/.rbenv/plugins/ruby-build;
-              git pull;
-              cd;
               cd College_Management_System;
               sudo dos2unix deploy.sh;
               source deploy.sh
