@@ -3,8 +3,6 @@
 sudo apt update && sudo apt install rbenv tilde libffi-dev libyaml-dev nodejs npm
 # Install bundler
 sudo gem install bundler
-# Install rails
-sudo gem install rails
 # Bundle install
 bundle install
 # Grant access to project directory
