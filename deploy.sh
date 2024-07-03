@@ -7,25 +7,27 @@ sudo apt update && sudo apt install -y tilde libffi-dev libyaml-dev nodejs npm r
 which ruby
 ruby -v
 
-# Add rbenv to the shell configuration in .bash_profile
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+# Install rbenv if not installed
+if [ ! -d "$HOME/.rbenv" ]; then
+  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+fi
 
-# Apply the changes
-source ~/.bash_profile
+# Add rbenv to the shell configuration in .bashrc if not already added
+if ! grep -q 'rbenv init' ~/.bashrc; then
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+  echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
+fi
 
-# Add rbenv to the shell configuration in .bashrc
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
-
-# Apply the changes
-source ~/.bashrc
+# Apply the changes in the current shell
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - bash)"
 
 # Check the current Ruby version
 which ruby
 
-# Update rbenv and install the specified Ruby version
-git -C ~/.rbenv/plugins/ruby-build pull
+# Update rbenv and install specific Ruby version if not installed
+rbenv install -s 3.3.1
 rbenv global 3.3.1
 
 # Check the current Ruby version
