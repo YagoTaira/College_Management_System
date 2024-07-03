@@ -44,5 +44,6 @@ jobs:
               sudo git clone https://github.com/YagoTaira/College_Management_System.git;
               cd College_Management_System;
               sudo dos2unix deploy.sh;
-              source deploy.sh
+              source deploy.sh;
+              exit 0
             "
