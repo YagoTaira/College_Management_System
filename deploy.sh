@@ -53,3 +53,6 @@ sleep 10
 
 # Print the running server processes
 ps aux | grep rails
+
+# Exit with success status
+exit 0
