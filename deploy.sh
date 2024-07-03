@@ -11,6 +11,16 @@ ruby -v
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 
+# Apply the changes
+source ~/.bash_profile
+
+# Add rbenv to the shell configuration
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
+
+# Apply the changes
+source ~/.bashrc
+
 # Check the current Ruby version
 which ruby
 
