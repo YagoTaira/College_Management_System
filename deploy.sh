@@ -7,14 +7,14 @@ sudo apt update && sudo apt install -y tilde libffi-dev libyaml-dev nodejs npm r
 which ruby
 ruby -v
 
-# Add rbenv PATH to .bash_profile
+# Add rbenv to the shell configuration in .bash_profile
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 
 # Apply the changes
 source ~/.bash_profile
 
-# Add rbenv to the shell configuration
+# Add rbenv to the shell configuration in .bashrc
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
 
