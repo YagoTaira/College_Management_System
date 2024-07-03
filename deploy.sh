@@ -45,5 +45,11 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/College_Management_System
 # Run database migrations
 rails db:migrate
 
-# Start the Rails server on port 3000
-sudo /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 80
+# Start the Rails server using pm2
+pm2 start /home/ubuntu/.rbenv/shims/rails -- server --binding 0.0.0.0 --port 80
+
+# Wait for the server to start
+sleep 10
+
+# Print the running server processes
+pm2 status
