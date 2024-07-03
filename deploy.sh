@@ -7,12 +7,18 @@ sudo apt update && sudo apt install -y tilde libffi-dev libyaml-dev nodejs npm r
 which ruby
 ruby -v
 
+# Add rbenv PATH to .bash_profile
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+
+# Check the current Ruby version
+which ruby
+
 # Update rbenv and install the specified Ruby version
 git -C ~/.rbenv/plugins/ruby-build pull
 rbenv global 3.3.1
 
-# List available Ruby versions
-rbenv install --list
+# Check the current Ruby version
 ruby -v
 
 # Install Bundler and Rails gems
@@ -28,4 +34,4 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/College_Management_System
 rails db:migrate
 
 # Start the Rails server on port 3000
-sudo /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 3000
+sudo /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 80
