@@ -45,8 +45,8 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/College_Management_System
 # Run database migrations
 rails db:migrate
 
-# Start the Rails server on port 80 in the background
-sudo nohup /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 80 &
+# Start the Rails server on port 80 in the background and redirect output
+sudo nohup /home/ubuntu/.rbenv/shims/rails server --binding 0.0.0.0 --port 80 > /home/ubuntu/rails.log 2>&1 &
 
 # Wait for the server to start
 sleep 10
