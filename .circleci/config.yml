@@ -52,6 +52,9 @@ jobs:
             # Download ChromeDriver
             npx @puppeteer/browsers install chromedriver@126.0.6478.126
 
+            # Remove bin directory
+            sudo rm -rf ~/bin
+
             # Create bin directory
             mkdir ~/bin
 
