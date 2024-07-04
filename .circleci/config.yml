@@ -25,6 +25,47 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Google Chrome
+          command: |
+            # Install dependencies
+            sudo apt-get update
+            sudo apt install -y wget apt-transport-https
+
+            # Download Google Chrome Debian Package:
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+            # Install the package
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+            # Fix Missing Dependencies
+            sudo apt --fix-broken install
+
+            # Verify Installation
+            google-chrome --version
+      - run:
+          name: Install ChromeDriver
+          command: |
+            # Download ChromeDriver
+            npx @puppeteer/browsers install chromedriver@126.0.6478.126
+
+            # Create bin directory
+            mkdir ~/bin
+
+            # Move chromdriver to bin folder
+            sudo mv /home/ubuntu/chromedriver/linux-126.0.6478.126/chromedriver-linux64/chromedriver ~/bin/chromedriver
+
+            # Add permission to execute chromedriver
+            chmod +x ~/bin/chromedriver
+
+            # Add PATH
+            export PATH="$HOME/bin:$PATH"
+
+            # Apply changes
+            source ~/.bashrc
+
+            # Verify installation
+            chromedriver --version
+      - run:
           name: Install dependencies
           command: |
             bundle install
