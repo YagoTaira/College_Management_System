@@ -59,7 +59,7 @@ jobs:
             mkdir ~/bin
 
             # Move chromdriver to bin folder
-            sudo mv /home/ubuntu/chromedriver/linux-126.0.6478.126/chromedriver-linux64/chromedriver ~/bin/chromedriver
+            sudo mv /home/circleci/College_Management_System/chromedriver/linux-126.0.6478.126/chromedriver-linux64/chromedriver ~/bin/chromedriver
 
             # Add permission to execute chromedriver
             chmod +x ~/bin/chromedriver
