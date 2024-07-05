@@ -23,21 +23,29 @@ jobs:
           name: Install Chrome and dependencies
           command: |
             sudo apt-get update
-            sudo apt-get install -y wget
-            sudo apt-get install -y fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo apt-get install -f -y
+            sudo apt install software-properties-common apt-transport-https wget
+            sudo apt install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev
+            sudo apt install google-chrome-stable
             google-chrome --version
-
       - run:
           name: Install ChromeDriver
           command: |
-            CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
-            wget "https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip"
+            # Set the version you want to install
+            CHROMEDRIVER_VERSION="126.0.6478.126"
+
+            # Download ChromeDriver
+            wget "https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip"
+
+            # Unzip the file
             unzip chromedriver-linux64.zip
+
+            # Move ChromeDriver to a directory in your PATH
             sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+
+            # Make it executable
             sudo chmod +x /usr/local/bin/chromedriver
+
+            # Verify the installation
             chromedriver --version
       - run:
           name: Install Ruby and JavaScript Dependencies
@@ -48,9 +56,7 @@ jobs:
           name: Run tests with Xvfb
           command: |
             sudo apt-get update && sudo apt-get install -y xvfb
-            Xvfb :99 -ac &
-            export DISPLAY=:99
-            bundle exec rspec
+            xvfb-run rspec
 
   deploy:
     docker:
