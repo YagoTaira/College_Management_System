@@ -46,6 +46,9 @@ jobs:
           name: Setup ChromeDriver
           command: |
             sudo apt-get update
+            sudo apt install snapd
+            sudo snap install core
+            sudo snap install chromium
             sudo apt-get install -y chromium-browser chromium-chromedriver
             chromium-browser --version
             chromedriver --version
