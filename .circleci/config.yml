@@ -3,13 +3,18 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - build: # Defines a job named 'build'
           filters:
             branches:
-              only: main
+              only:
+                - main # Execute this job only when code is pushed to the 'main' branch.
+      - deploy: # Defines a job named 'deploy'
+          filters:
+            branches:
+              only:
+                - main # Execute this job only when code is pushed to the 'main' branch.
+          requires:
+            - build # Ensures the 'deploy' job runs only after the 'build' job succeeds
 
 jobs:
   build:
