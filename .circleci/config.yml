@@ -74,7 +74,7 @@ jobs:
             chromedriver --version
       - run:
           name: Install Xvfb
-          description: Run server wihout display
+          description: Run server without display
           command: |
             sudo apt install xvfb
       - run:
