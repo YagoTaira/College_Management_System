@@ -1,21 +1,15 @@
 version: 2.1
-
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build: # Defines a job named 'build'
-          filters:
-            branches:
-              only:
-                - main # Execute this job only when code is pushed to the 'main' branch.
-      - deploy: # Defines a job named 'deploy'
-          filters:
-            branches:
-              only:
-                - main # Execute this job only when code is pushed to the 'main' branch.
+      - build
+      - deploy:
           requires:
-            - build # Ensures the 'deploy' job runs only after the 'build' job succeeds
+            - build
+          filters:
+            branches:
+              only: main
 
 jobs:
   build:
@@ -46,11 +40,11 @@ jobs:
             bundle install
             yarn install
       - run:
-          name: Setup Chromium and ChromeDriver
+          name: Setup ChromeDriver
           command: |
-            sudo apt-get update
-            sudo apt-get install -y chromium-browser chromium-chromedriver
-            chromium-browser --version
+            sudo apt install snap
+            sudo snap install chromium
+            sudo apt install chromium-chromedriver
             chromedriver --version
       - run:
           name: Run tests
