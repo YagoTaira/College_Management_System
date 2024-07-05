@@ -24,6 +24,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y wget
+            sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev
             sudo apt-get install -y fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -50,6 +51,17 @@ jobs:
             # Verify the installation
             which chromedriver
             chromedriver --version
+      - run:
+          name: Verify Chrome and ChromeDriver setup
+          command: |
+            echo "Chrome version:"
+            google-chrome --version
+            echo "ChromeDriver version:"
+            chromedriver --version
+            echo "ChromeDriver path:"
+            which chromedriver
+            echo "Contents of /usr/bin:"
+            ls -l /usr/bin | grep chrome
       - run:
           name: Install Ruby and JavaScript Dependencies
           command: |
