@@ -42,6 +42,7 @@ jobs:
       - run:
           name: Setup ChromeDriver
           command: |
+            sudo apt install snap
             sudo snap install chromium
             sudo apt install chromium-chromedriver
             chromedriver --version
