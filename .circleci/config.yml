@@ -38,21 +38,22 @@ jobs:
           command: Xvfb :99 -ac &
           background: true
       - run:
-          name: Install Ruby and JavaScript Dependencies
-          command: |
-            bundle install
-            yarn install
-      - run:
           name: Setup ChromeDriver
           command: |
             wget "https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip"
-            sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+            sudo unzip chromedriver-linux64.zip -d /tmp/
+            sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
       - run:
           name: Check versions
           command: |
             google-chrome --version
             chromedriver --version
+      - run:
+          name: Install Ruby and JavaScript Dependencies
+          command: |
+            bundle install
+            yarn install
       - run:
           name: Run Tests
           command: |
