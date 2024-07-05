@@ -20,30 +20,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Dependencies for Google Chrome
+          name: Setup Chrome and ChromeDriver
           command: |
-            sudo apt-get update
-            sudo apt-get install -y wget apt-transport-https fonts-liberation \
-              libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
-              libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 \
-              xdg-utils
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
-            google-chrome --version
-      - run:
-          name: Install Xvfb
-          command: sudo apt install -y xvfb
-      - run:
-          name: Start Xvfb
-          command: Xvfb :99 -ac &
-          background: true
-      - run:
-          name: Setup ChromeDriver
-          command: |
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            sudo apt-get install -f
             wget "https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip"
-            sudo unzip chromedriver-linux64.zip -d /tmp/
-            sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
+            unzip chromedriver-linux64.zip
+            sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
+            google-chrome --version
             chromedriver --version
       - run:
           name: Install Ruby and JavaScript Dependencies
@@ -51,12 +37,11 @@ jobs:
             bundle install
             yarn install
       - run:
-          name: Set DISPLAY environment variable
-          command: echo "export DISPLAY=:99" >> $BASH_ENV
-      - run:
           name: Run tests with Xvfb
           command: |
-            source $BASH_ENV
+            sudo apt-get update && sudo apt-get install -y xvfb
+            Xvfb :99 -ac &
+            export DISPLAY=:99
             bundle exec rspec
 
   deploy:
