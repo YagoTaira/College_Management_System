@@ -42,9 +42,8 @@ jobs:
       - run:
           name: Setup ChromeDriver
           command: |
-            CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
-            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-            bundle exec rails runner 'Webdrivers::Chromedriver.required_version = "'$CHROMEDRIVER_VERSION'"'
+            sudo apt install chromium-chromedriver
+            chromedriver --version
       - run:
           name: Run tests
           command: |
