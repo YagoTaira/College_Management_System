@@ -27,22 +27,9 @@ jobs:
       - run:
           name: Install Google Chrome
           command: |
-            # Install dependencies
-            sudo apt-get update
-            sudo apt-get install -y wget apt-transport-https \
-              fonts-liberation libatk-bridge2.0-0 libatk1.0-0 \
-              libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 \
-              libnss3 libu2f-udev libvulkan1 libxcomposite1 \
-              libxdamage1 xdg-utils
-
-            # Download Google Chrome Debian Package:
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-
-            # Install the package
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-            # Fix Missing Dependencies
-            sudo apt-get install -f
+            # Install Chrome
+            sudo apt update
+            sudo apt install google-chrome-stable
 
             # Verify Installation
             google-chrome --version
@@ -73,13 +60,18 @@ jobs:
             # Verify installation
             chromedriver --version
       - run:
+          name: Install Xvfb
+          description: Run server wihout display
+          command: |
+            sudo apt install xvfb
+      - run:
           name: Install dependencies
           command: |
             bundle install
             yarn install
       - run:
-          name: Run tests
-          command: bundle exec rspec
+          name: Run tests without display
+          command: xvfb-run rspec
   deploy:
     docker:
       - image: cimg/ruby:3.3.1-node
