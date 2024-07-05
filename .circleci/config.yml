@@ -63,6 +63,11 @@ jobs:
             echo "Contents of /usr/bin:"
             ls -l /usr/bin | grep chrome
       - run:
+          name: Clear cache
+          command: |
+            rm -rf ~/.chromedriver
+            bundle exec rake webdrivers:chromedriver:update
+      - run:
           name: Install Ruby and JavaScript Dependencies
           command: |
             bundle install
