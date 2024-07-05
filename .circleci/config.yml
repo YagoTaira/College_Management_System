@@ -42,10 +42,10 @@ jobs:
             unzip chromedriver-linux64.zip
 
             # Move ChromeDriver to a directory in your PATH
-            sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+            sudo mv chromedriver-linux64/chromedriver /usr/bin/
 
             # Make it executable
-            sudo chmod +x /usr/local/bin/chromedriver
+            sudo chmod +x /usr/bin/chromedriver
 
             # Verify the installation
             chromedriver --version
