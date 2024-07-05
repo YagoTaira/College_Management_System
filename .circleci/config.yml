@@ -40,11 +40,11 @@ jobs:
             bundle install
             yarn install
       - run:
-          name: Setup ChromeDriver
+          name: Setup Chromium and ChromeDriver
           command: |
-            sudo apt install snap
-            sudo snap install chromium
-            sudo apt install chromium-chromedriver
+            sudo apt-get update
+            sudo apt-get install -y chromium-browser chromium-chromedriver
+            chromium-browser --version
             chromedriver --version
       - run:
           name: Run tests
