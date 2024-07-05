@@ -45,11 +45,15 @@ jobs:
       - run:
           name: Setup ChromeDriver
           command: |
-            sudo apt-get update
-            sudo apt install snapd
-            sudo snap install chromium
-            sudo apt-get install -y chromium-browser chromium-chromedriver
-            chromium-browser --version
+            CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
+            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+            wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+            sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+            sudo chmod +x /usr/local/bin/chromedriver
+      - run:
+          name: Check versions
+          command: |
+            google-chrome --version
             chromedriver --version
       - run:
           name: Run Tests
