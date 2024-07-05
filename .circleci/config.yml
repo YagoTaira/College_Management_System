@@ -1,21 +1,15 @@
 version: 2.1
-
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build: # Defines a job named 'build'
-          filters:
-            branches:
-              only:
-                - main # Execute this job only when code is pushed to the 'main' branch.
-      - deploy: # Defines a job named 'deploy'
-          filters:
-            branches:
-              only:
-                - main # Execute this job only when code is pushed to the 'main' branch.
+      - build
+      - deploy:
           requires:
-            - build # Ensures the 'deploy' job runs only after the 'build' job succeeds
+            - build
+          filters:
+            branches:
+              only: main
 
 jobs:
   build:
@@ -27,39 +21,12 @@ jobs:
       - run:
           name: Install Google Chrome
           command: |
-            # Download and Install dependencies
             sudo apt-get update
             sudo apt-get install -y wget apt-transport-https fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome-stable_current_amd64.deb
             sudo apt-get install -f
             google-chrome --version
-      - run:
-          name: Install ChromeDriver
-          command: |
-            # Download ChromeDriver
-            npx @puppeteer/browsers install chromedriver@126.0.6478.126
-
-            # Remove bin directory
-            sudo rm -rf ~/bin
-
-            # Create bin directory
-            mkdir ~/bin
-
-            # Move chromdriver to bin folder
-            sudo mv /home/circleci/College_Management_System/chromedriver/linux-126.0.6478.126/chromedriver-linux64/chromedriver ~/bin/chromedriver
-
-            # Add permission to execute chromedriver
-            chmod +x ~/bin/chromedriver
-
-            # Add PATH
-            export PATH="$HOME/bin:$PATH"
-
-            # Apply changes
-            source ~/.bashrc
-
-            # Verify installation
-            chromedriver --version
       - run:
           name: Install Xvfb
           command: sudo apt install xvfb
@@ -73,8 +40,18 @@ jobs:
             bundle install
             yarn install
       - run:
+          name: Setup Chromium and ChromeDriver
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y chromium-browser chromium-chromedriver
+            chromium-browser --version
+            chromedriver --version
+      - run:
           name: Run tests
-          command: bundle exec rspec
+          command: |
+            export DISPLAY=:99
+            bundle exec rspec
+
   deploy:
     docker:
       - image: cimg/ruby:3.3.1-node
@@ -83,9 +60,9 @@ jobs:
           name: deploy-application
           command: |
             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
-              sudo rm -rf College_Management_System/;
-              sudo git clone https://github.com/YagoTaira/College_Management_System.git;
-              cd College_Management_System;
-              sudo dos2unix deploy.sh;
-              source deploy.sh;
+            sudo rm -rf College_Management_System/;
+            sudo git clone https://github.com/YagoTaira/College_Management_System.git;
+            cd College_Management_System;
+            sudo dos2unix deploy.sh;
+            source deploy.sh;
             "
