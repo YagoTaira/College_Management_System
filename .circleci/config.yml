@@ -1,4 +1,5 @@
 version: 2.1
+
 workflows:
   version: 2
   build_and_test:
@@ -19,23 +20,25 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Google Chrome
+          name: Install Dependencies for Google Chrome
           command: |
             sudo apt-get update
-            sudo apt-get install -y wget apt-transport-https fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils
+            sudo apt-get install -y wget apt-transport-https fonts-liberation \
+              libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgtk-3-0 \
+              libnspr4 libnss3 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 \
+              xdg-utils
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo apt-get install -f
+            sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
             google-chrome --version
       - run:
           name: Install Xvfb
-          command: sudo apt install xvfb
+          command: sudo apt install -y xvfb
       - run:
           name: Start Xvfb
           command: Xvfb :99 -ac &
           background: true
       - run:
-          name: Install dependencies
+          name: Install Ruby and JavaScript Dependencies
           command: |
             bundle install
             yarn install
@@ -47,7 +50,7 @@ jobs:
             chromium-browser --version
             chromedriver --version
       - run:
-          name: Run tests
+          name: Run Tests
           command: |
             export DISPLAY=:99
             bundle exec rspec
@@ -57,7 +60,7 @@ jobs:
       - image: cimg/ruby:3.3.1-node
     steps:
       - run:
-          name: deploy-application
+          name: Deploy Application
           command: |
             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
             sudo rm -rf College_Management_System/;
