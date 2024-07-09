@@ -7,8 +7,22 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'webdrivers/chromedriver'
 
-Capybara.default_driver = :selenium_chrome
+if ENV['CI'] || RUBY_PLATFORM =~ /linux/
+  Selenium::WebDriver::Chrome::Service.driver_path = '/usr/bin/chromedriver'
+else
+  Selenium::WebDriver::Chrome::Service.driver_path = '/Users/YagoPacotinho/bin/chromedriver'
+end
+
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless') if ENV['CI']
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :chrome
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -67,4 +81,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+  config.before(:each, type: :system) do
+    driven_by :chrome
+  end
 end
