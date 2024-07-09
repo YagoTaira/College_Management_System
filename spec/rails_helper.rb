@@ -10,7 +10,7 @@ require 'capybara/rspec'
 require 'selenium-webdriver'
 require 'webdrivers/chromedriver'
 
-Webdrivers::Chromedriver.required_version = '114.0.5735.90'  # Use a stable version
+Webdrivers::Chromedriver.required_version = '114.0.5735.90'
 Selenium::WebDriver::Chrome::Service.driver_path = '/usr/bin/chromedriver'
 
 Capybara.register_driver :chrome do |app|
