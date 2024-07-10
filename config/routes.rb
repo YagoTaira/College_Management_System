@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   get 'courses/destroy'
   resources :students
   resources :courses do
-    resources :enrollments
+    resources :enrollments do
+      resources :grades
+    end
   end
   resources :enrollments
   resources :grades

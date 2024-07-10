@@ -8,4 +8,8 @@ class Enrollment < ApplicationRecord
   validates :student_id, presence: true
   validates :course_id, presence: true
   validates :student_id, uniqueness: { scope: :course_id, message: "is already enrolled in this course" }
+
+  def to_s
+    "#{student.name} - #{course.title}"
+  end
 end
