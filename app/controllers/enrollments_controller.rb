@@ -21,7 +21,7 @@ class EnrollmentsController < ApplicationController
     else
       @students = Student.all
       @courses = Course.all
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class EnrollmentsController < ApplicationController
     else
       @students = Student.all
       @courses = Course.all
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

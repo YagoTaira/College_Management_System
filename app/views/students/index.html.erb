@@ -2,15 +2,28 @@
 
 <p style="color: green"><%= notice %></p>
 
-<div id="students">
-  <% @students.each do |student| %>
-    <div>
-      <%= render student %>
-      <%= link_to 'Edit', edit_student_path(student) %> |
-      <%= link_to 'Delete', student, data: { turbo_method: :delete } %>
-    </div>
-    <br>
-  <% end %>
-</div>
-
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.age %></td>
+        <td><%= student.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_student_path(student) %>
+          <%= link_to 'Delete', student, data: { turbo_method: :delete } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
 <%= link_to "New student", new_student_path %>

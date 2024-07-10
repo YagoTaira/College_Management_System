@@ -1,2 +1,31 @@
-<h1>Grades#index</h1>
-<p>Find me in app/views/grades/index.html.erb</p>
+<h1>Grades</h1>
+
+<p style="color: green"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Grade</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @grades.each do |grade| %>
+      <tr>
+        <td><%= grade.enrollment.student.name %></td>
+        <td><%= grade.enrollment.course.title %></td>
+        <td><%= grade.score %></td>
+        <td>
+          <%= link_to 'Edit', edit_course_enrollment_grade_path(grade.enrollment.course, grade.enrollment, grade) %>
+          <%= link_to 'Delete', grade, data: { turbo_method: :delete } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Grade', new_grade_path %>
