@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <h1>Welcome to the College Management System</h1>
+  <br>
+  <table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Lecturer</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @grades.each do |grade| %>
+      <tr>
+        <td><%= grade.enrollment.student.name %></td>
+        <td><%= grade.enrollment.course.title %></td>
+        <td><%= grade.enrollment.lecturer.name %></td>
+        <td><%= grade.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <br>
+  <div class="dashboard">
+    <h2>Dashboard</h2>
+    
+    <ul>
+      <li><%= link_to 'Lecturers', lecturers_path %></li>
+      <li><%= link_to 'Courses', courses_path %></li>
+      <li><%= link_to 'Students', students_path %></li>
+      <li><%= link_to 'Grades', grades_path %></li>
+      <li><%= link_to 'Enrollments', enrollments_path %></li>
+      <li><%= link_to 'Attendances', attendances_path %></li>
+    </ul>
+  </div>
+  <br>
+  <footer>
+    <p>&copy; 2024 College Management System</p>
+  </footer>
+</body>
+</html>
