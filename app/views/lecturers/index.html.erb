@@ -23,12 +23,20 @@
             background-color: var(--background-color);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
         }
         
         .container {
             width: 90%;
             margin: auto;
-            overflow: hidden;
             padding: 0 20px;
         }
         
@@ -74,10 +82,10 @@
         
         .content {
             background: #fff;
-            margin-top: 20px;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
         }
         
         .content h2 {
@@ -172,40 +180,42 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <div class="content">
-            <h2>Lecturers</h2>
-            
-            <% if notice %>
-                <p class="notice"><%= notice %></p>
-            <% end %>
-            
-            <table class="lecturers-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th colspan="2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @lecturers.each do |lecturer| %>
-                    <tr>
-                        <td><%= lecturer.name %></td>
-                        <td><%= lecturer.email %></td>
-                        <td>
-                            <%= link_to 'Edit', edit_lecturer_path(lecturer), class: 'btn' %>
-                            <%= link_to 'Delete', lecturer, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                        </td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            
-            <br>
-            
-            <%= link_to "New Lecturer", new_lecturer_path, class: 'btn' %>
-        </div>
+    <div class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2>Lecturers</h2>
+              
+              <% if notice %>
+                  <p class="notice"><%= notice %></p>
+              <% end %>
+              
+              <table class="lecturers-table">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th colspan="2">Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% @lecturers.each do |lecturer| %>
+                      <tr>
+                          <td><%= lecturer.name %></td>
+                          <td><%= lecturer.email %></td>
+                          <td>
+                              <%= link_to 'Edit', edit_lecturer_path(lecturer), class: 'btn' %>
+                              <%= link_to 'Delete', lecturer, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+                          </td>
+                      </tr>
+                      <% end %>
+                  </tbody>
+              </table>
+              
+              <br>
+              
+              <%= link_to "New Lecturer", new_lecturer_path, class: 'btn' %>
+          </div>
+      </div>
     </div>
 
     <footer>

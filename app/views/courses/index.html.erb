@@ -23,12 +23,20 @@
             background-color: var(--background-color);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
         }
         
         .container {
             width: 90%;
             margin: auto;
-            overflow: hidden;
             padding: 0 20px;
         }
         
@@ -74,10 +82,10 @@
         
         .content {
             background: #fff;
-            margin-top: 20px;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
         }
         
         .content h2 {
@@ -160,26 +168,28 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <div class="content">
-            <h2>Courses</h2>
-            
-            <% if notice %>
-                <p class="notice"><%= notice %></p>
-            <% end %>
-            
-            <div id="courses">
-                <% @courses.each do |course| %>
-                    <div class="course-card">
-                        <%= render course %>
-                        <%= link_to 'Edit', edit_course_path(course), class: 'btn' %>
-                        <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                    </div>
-                <% end %>
-            </div>
-            
-            <%= link_to "New Course", new_course_path, class: 'btn' %>
-        </div>
+    <div class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2>Courses</h2>
+              
+              <% if notice %>
+                  <p class="notice"><%= notice %></p>
+              <% end %>
+              
+              <div id="courses">
+                  <% @courses.each do |course| %>
+                      <div class="course-card">
+                          <%= render course %>
+                          <%= link_to 'Edit', edit_course_path(course), class: 'btn' %>
+                          <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+                      </div>
+                  <% end %>
+              </div>
+              
+              <%= link_to "New Course", new_course_path, class: 'btn' %>
+          </div>
+      </div>
     </div>
 
     <footer>
