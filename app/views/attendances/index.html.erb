@@ -1,2 +1,33 @@
-<h1>Attendances#index</h1>
-<p>Find me in app/views/attendances/index.html.erb</p>
+<h1>Attendances</h1>
+
+<p style="color: green"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.enrollment.student.name %></td>
+        <td><%= attendance.enrollment.course.title %></td>
+        <td><%= attendance.date.strftime("%d/%m/%y") %></td>
+        <td><%= attendance.status %></td>
+        <td>
+          <%= link_to 'Edit', edit_attendance_path(attendance) %>
+          <%= link_to 'Delete', attendance, data: { turbo_method: :delete } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attendance', new_attendance_path %>
