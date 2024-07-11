@@ -18,7 +18,7 @@
         <td><%= grade.enrollment.course.title %></td>
         <td><%= grade.score %></td>
         <td>
-          <%= link_to 'Edit', edit_course_enrollment_grade_path(grade.enrollment.course, grade.enrollment, grade) %>
+          <%= link_to 'Edit', edit_grade_path(grade) %>
           <%= link_to 'Delete', grade, data: { turbo_method: :delete } %>
         </td>
       </tr>
