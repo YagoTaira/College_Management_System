@@ -1,10 +1,8 @@
-<div id="<%= dom_id course %>">
-  <div>
-    <strong>Title:</strong>
-    <%= course.title %>
-    <br>
-    <strong>Description:</strong>
-    <%= course.description %>
+<div id="<%= dom_id course %>" class="course-card">
+  <h3 class="course-title"><%= course.title %></h3>
+  <p class="course-description"><%= course.description %></p>
+  <div class="course-actions">
+    <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-small' %>
+    <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-small btn-danger' %>
   </div>
-
 </div>

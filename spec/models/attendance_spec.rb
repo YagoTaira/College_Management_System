@@ -22,6 +22,6 @@ RSpec.describe Attendance, type: :model do
     Attendance.create!(enrollment: enrollment, date: Date.new(2024, 5, 31), status: "Absent")
     duplicate_attendance_date = Attendance.new(enrollment: enrollment, date: Date.new(2024, 5, 31), status: "Present")
     expect(duplicate_attendance_date).not_to be_valid
-    expect(duplicate_attendance_date.errors[:date]).to include("is already registered")
+    expect(duplicate_attendance_date.errors[:date]).to include("has already been registered for this student")
   end
 end

@@ -3,7 +3,7 @@ class Attendance < ApplicationRecord
 
   validates :enrollment_id, presence: true
   validates :status, presence: true
-  validates :date, presence: true, uniqueness: { message: "is already registered" }
+  validates :date, presence: true, uniqueness: { scope: :enrollment_id, message: "has already been registered for this student" }
   validate :date_cannot_be_in_the_future
 
   private
