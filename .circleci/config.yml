@@ -5,15 +5,30 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - deploy:
+      - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only: main
 
 jobs:
   build:
+    working_directory: ~/College_Management_System
+    docker:
+      - image: cimg/ruby:3.3.1-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install Ruby and JavaScript Dependencies
+          command: |
+            bundle install
+            yarn install
+
+  test:
     working_directory: ~/College_Management_System
     docker:
       - image: cimg/ruby:3.3.1-browsers
