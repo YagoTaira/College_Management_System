@@ -95,16 +95,52 @@
         }
         
         .course-card {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .course-title {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .course-description {
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .course-actions {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .btn-small {
+            font-size: 0.9em;
+            padding: 5px 10px;
         }
         
         .course-card h3 {
             color: var(--primary-color);
             margin-top: 0;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
         }
         
         .btn {
@@ -169,27 +205,23 @@
     </nav>
 
     <div class="wrapper">
-      <div class="container">
-          <div class="content">
-              <h2>Courses</h2>
-              
-              <% if notice %>
-                  <p class="notice"><%= notice %></p>
-              <% end %>
-              
-              <div id="courses">
-                  <% @courses.each do |course| %>
-                      <div class="course-card">
-                          <%= render course %>
-                          <%= link_to 'Edit', edit_course_path(course), class: 'btn' %>
-                          <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                      </div>
-                  <% end %>
-              </div>
-              
-              <%= link_to "New Course", new_course_path, class: 'btn' %>
-          </div>
-      </div>
+        <div class="container">
+            <div class="content">
+                <h2>Courses</h2>
+                
+                <% if notice %>
+                <p class="notice"><%= notice %></p>
+                <% end %>
+                
+                <div class="courses-grid">
+                <% @courses.each do |course| %>
+                    <%= render course %>
+                <% end %>
+                </div>
+                
+                <%= link_to 'New Course', new_course_path, class: 'btn' %>
+            </div>
+        </div>
     </div>
 
     <footer>
