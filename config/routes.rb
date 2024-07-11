@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'lecturers/index'
+  get 'lecturers/show'
+  get 'lecturers/new'
+  get 'lecturers/create'
+  get 'lecturers/edit'
+  get 'lecturers/update'
+  get 'lecturers/destroy'
   get 'attendances/index'
   get 'attendances/show'
   get 'attendances/new'
@@ -26,12 +33,8 @@ Rails.application.routes.draw do
   get 'courses/update'
   get 'courses/destroy'
   resources :students
-  resources :courses do
-    resources :enrollments do
-      resources :grades
-      resources :attendances
-    end
-  end
+  resources :lecturers
+  resources :courses
   resources :enrollments
   resources :grades
   resources :attendances

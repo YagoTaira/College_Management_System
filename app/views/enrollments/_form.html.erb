@@ -11,18 +11,22 @@
     </div>
   <% end %>
 
-    <div>
-        <%= form.label :student_id, style: "display: block" %>
-        <%= form.collection_select :student_id, @students, :id, :name %>
-    </div>
+  <div>
+    <%= form.label :student_id, style: "display: block" %>
+    <%= form.collection_select :student_id, @students, :id, :name %>
+  </div>
 
-    <div>
-        <%= form.label :course_id, style: "display: block" %>
-        <%= form.collection_select :course_id, @courses, :id, :title %>
-    </div>
+  <div>
+    <%= form.label :course_id, style: "display: block" %>
+    <%= form.collection_select :course_id, @courses, :id, :title %>
+  </div>
 
-    <div>
-        <%= form.submit %>
-    </div>
+  <div>
+    <%= form.label :lecturer_id, style: "display: block" %>
+    <%= form.collection_select :lecturer_id, @lecturers, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
 <% end %>
-    

@@ -12,6 +12,7 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.new
     @students = Student.all
     @courses = Course.all
+    @lecturers = Lecturer.all
   end
 
   def create
@@ -21,6 +22,7 @@ class EnrollmentsController < ApplicationController
     else
       @students = Student.all
       @courses = Course.all
+      @lecturers = Lecturer.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,6 +30,7 @@ class EnrollmentsController < ApplicationController
   def edit
     @students = Student.all
     @courses = Course.all
+    @lecturers = Lecturer.all
   end
 
   def update
@@ -36,6 +39,7 @@ class EnrollmentsController < ApplicationController
     else
       @students = Student.all
       @courses = Course.all
+      @lecturers = Lecturer.all
       render :edit, status: :unprocessable_entity
     end
   end
@@ -52,6 +56,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def enrollment_params
-    params.require(:enrollment).permit(:student_id, :course_id)
+    params.require(:enrollment).permit(:student_id, :course_id, :lecturer_id)
   end
 end
