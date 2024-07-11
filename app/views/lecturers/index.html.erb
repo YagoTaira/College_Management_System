@@ -1,2 +1,27 @@
-<h1>Lecturers#index</h1>
-<p>Find me in app/views/lecturers/index.html.erb</p>
+<h1>Lecturers</h1>
+
+<p style="color: green"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lecturers.each do |lecturer| %>
+      <tr>
+        <td><%= lecturer.name %></td>
+        <td><%= lecturer.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_lecturer_path(lecturer) %>
+          <%= link_to 'Delete', lecturer, data: { turbo_method: :delete } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to "New lecturer", new_lecturer_path %>
