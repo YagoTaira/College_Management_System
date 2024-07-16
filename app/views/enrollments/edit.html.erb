@@ -1,2 +1,4 @@
+<% content_for :title, "Edit Enrollment" %>
+<h1>Edit Enrollment</h1>
 <%= render 'form', enrollment: @enrollment %>
-<%= link_to 'Back', enrollments_path %>
+<%= link_to 'Back to Enrollments', enrollments_path, class: 'btn' %>
