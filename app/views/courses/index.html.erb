@@ -1,56 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - College Management System</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= stylesheet_link_tag "courses", media: "all" %>
-    <%= javascript_importmap_tags %>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>College Management System</h1>
-        </div>
-    </header>
+<% content_for :title, "Courses" %>
+<h2>Courses</h2>
 
-    <nav>
-        <ul>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Lecturers', lecturers_path %></li>
-            <li><%= link_to 'Courses', courses_path %></li>
-            <li><%= link_to 'Students', students_path %></li>
-            <li><%= link_to 'Grades', grades_path %></li>
-            <li><%= link_to 'Enrollments', enrollments_path %></li>
-            <li><%= link_to 'Attendances', attendances_path %></li>
-        </ul>
-    </nav>
+<% if notice %>
+<p class="notice"><%= notice %></p>
+<% end %>
+<br>
+<div class="courses-grid">
+    <% @courses.each do |course| %>
+        <%= render course %>
+        <br>
+    <% end %>
+</div>
 
-    <div class="wrapper">
-        <div class="container">
-            <div class="content">
-                <h2>Courses</h2>
-                
-                <% if notice %>
-                <p class="notice"><%= notice %></p>
-                <% end %>
-                <br>
-                <div class="courses-grid">
-                <% @courses.each do |course| %>
-                    <%= render course %>
-                    <br>
-                <% end %>
-                </div>
-                <%= link_to 'New Course', new_course_path, class: 'btn' %>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 College Management System. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+<%= link_to 'New Course', new_course_path, class: 'btn' %>

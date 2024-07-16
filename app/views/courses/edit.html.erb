@@ -1,2 +1,4 @@
-<%= render "form", course: @course %>
-<%= link_to "Back", courses_path %>
+<% content_for :title, "Edit Course" %>
+<h1>Edit Course</h1>
+<%= render 'form', course: @course %>
+<%= link_to 'Back to Courses', courses_path, class: 'btn' %>

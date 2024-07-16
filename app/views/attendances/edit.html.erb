@@ -1,3 +1,4 @@
+<% content_for :title, "Edit Attendance" %>
 <h1>Edit Attendance</h1>
-<%= render "form", attendance: @attendance %>
-<%= link_to "Back", attendances_path %>
+<%= render 'form', attendance: @attendance %>
+<%= link_to 'Back to Attendances', attendances_path, class: 'btn' %>

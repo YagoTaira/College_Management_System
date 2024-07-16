@@ -1,2 +1,4 @@
-<%= render 'form', enrollment: @enrollment, grade: @grade %>
-<%= link_to 'Back', grades_path %>
+<% content_for :title, "New Grade" %>
+<h1>Edit Grade</h1>
+<%= render 'form', grade: @grade %>
+<%= link_to 'Back to Grades', grades_path, class: 'btn' %>

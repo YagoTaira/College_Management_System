@@ -1,73 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendances - College Management System</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= stylesheet_link_tag "grades", media: "all" %>
-    <%= javascript_importmap_tags %>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>College Management System</h1>
-        </div>
-    </header>
-
-    <nav>
-        <ul>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Lecturers', lecturers_path %></li>
-            <li><%= link_to 'Courses', courses_path %></li>
-            <li><%= link_to 'Students', students_path %></li>
-            <li><%= link_to 'Grades', grades_path %></li>
-            <li><%= link_to 'Enrollments', enrollments_path %></li>
-            <li><%= link_to 'Attendances', attendances_path %></li>
-        </ul>
-    </nav>
-
-    <div class="wrapper">
-        <div class="container">
-            <div class="content">
-                <h2>New Grade</h2>
-                
-                <%= form_with(model: grade) do |form| %>
-                    <% if grade.errors.any? %>
-                        <div class="error-message">
-                            <h2><%= pluralize(grade.errors.count, "error") %> prohibited this grade from being saved:</h2>
-                            <ul>
-                                <% grade.errors.each do |error| %>
-                                    <li><%= error.full_message %></li>
-                                <% end %>
-                            </ul>
-                        </div>
-                    <% end %>
-
-                    <div class="form-group">
-                      <%= form.label :enrollment_id, "Enrollment" %>
-                      <%= form.collection_select :enrollment_id, Enrollment.all, :id, :to_s, prompt: "Select Enrollment" %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= form.label :score, "Grade Score" %>
-                      <%= form.number_field :score, in: 0..100 %>
-                    </div>
-                    
-                    <div class="form-group">
-                        <%= form.submit class: 'btn' %>
-                    </div>
-                <% end %>
-                
-                <%= link_to 'Back to Grades', grades_path, class: 'btn' %>
-            </div>
-        </div>
+<%= form_with(model: grade) do |form| %>
+  <% if grade.errors.any? %>
+    <div class="error-message">
+      <h2><%= pluralize(grade.errors.count, "error") %> prohibited this grade from being saved:</h2>
+      <ul>
+        <% grade.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
+  <% end %>
 
-    <footer>
-        <p>&copy; 2024 College Management System. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+  <div class="form-group">
+    <%= form.label :enrollment_id, "Enrollment" %>
+    <%= form.collection_select :enrollment_id, Enrollment.all, :id, :to_s, prompt: "Select Enrollment" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :score, "Grade Score" %>
+    <%= form.number_field :score, in: 0..100 %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.submit class: 'btn' %>
+  </div>
+<% end %>

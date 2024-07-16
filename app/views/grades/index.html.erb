@@ -1,76 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades - College Management System</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= stylesheet_link_tag "grades", media: "all" %>
-    <%= javascript_importmap_tags %>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>College Management System</h1>
-        </div>
-    </header>
+<% content_for :title, "Grades" %>
+<h2>Grades</h2>
 
-    <nav>
-        <ul>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Lecturers', lecturers_path %></li>
-            <li><%= link_to 'Courses', courses_path %></li>
-            <li><%= link_to 'Students', students_path %></li>
-            <li><%= link_to 'Grades', grades_path %></li>
-            <li><%= link_to 'Enrollments', enrollments_path %></li>
-            <li><%= link_to 'Attendances', attendances_path %></li>
-        </ul>
-    </nav>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
-    <div class="wrapper">
-      <div class="container">
-          <div class="content">
-              <h2>Grades</h2>
-              
-              <% if notice %>
-                  <p class="notice"><%= notice %></p>
-              <% end %>
-              
-              <table class="grades-table">
-                  <thead>
-                      <tr>
-                          <th>Student</th>
-                          <th>Course</th>
-                          <th>Grade (0-100)</th>
-                          <th colspan="2">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <% @grades.each do |grade| %>
-                      <tr>
-                          <td><%= grade.enrollment.student.name %></td>
-                          <td><%= grade.enrollment.course.title %></td>
-                          <td><%= grade.score %></td>
-                          <td>
-                              <%= link_to 'Edit', edit_grade_path(grade), class: 'btn' %>
-                              <%= link_to 'Delete', grade, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                          </td>
-                      </tr>
-                      <% end %>
-                  </tbody>
-              </table>
-              
-              <br>
-              
-              <%= link_to 'New Grade', new_grade_path, class: 'btn' %>
-          </div>
-      </div>
-    </div>
+<table class="grades-table">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Grade (0-100)</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @grades.each do |grade| %>
+    <tr>
+      <td><%= grade.enrollment.student.name %></td>
+      <td><%= grade.enrollment.course.title %></td>
+      <td><%= grade.score %></td>
+      <td>
+        <%= link_to 'Edit', edit_grade_path(grade), class: 'btn' %>
+        <%= link_to 'Delete', grade, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-    <footer>
-        <p>&copy; 2024 College Management System. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+<%= link_to 'New Grade', new_grade_path, class: 'btn' %>

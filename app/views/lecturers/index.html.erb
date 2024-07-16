@@ -1,74 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecturers - College Management System</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= stylesheet_link_tag "lecturers", media: "all" %>
-    <%= javascript_importmap_tags %>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>College Management System</h1>
-        </div>
-    </header>
+<% content_for :title, "Lecturers" %>
+<h2>Lecturers</h2>
 
-    <nav>
-        <ul>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Lecturers', lecturers_path %></li>
-            <li><%= link_to 'Courses', courses_path %></li>
-            <li><%= link_to 'Students', students_path %></li>
-            <li><%= link_to 'Grades', grades_path %></li>
-            <li><%= link_to 'Enrollments', enrollments_path %></li>
-            <li><%= link_to 'Attendances', attendances_path %></li>
-        </ul>
-    </nav>
+<% if notice %>
+    <p class="notice"><%= notice %></p>
+<% end %>
 
-    <div class="wrapper">
-      <div class="container">
-          <div class="content">
-              <h2>Lecturers</h2>
-              
-              <% if notice %>
-                  <p class="notice"><%= notice %></p>
-              <% end %>
-              
-              <table class="lecturers-table">
-                  <thead>
-                      <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th colspan="2">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <% @lecturers.each do |lecturer| %>
-                      <tr>
-                          <td><%= lecturer.name %></td>
-                          <td><%= lecturer.email %></td>
-                          <td>
-                              <%= link_to 'Edit', edit_lecturer_path(lecturer), class: 'btn' %>
-                              <%= link_to 'Delete', lecturer, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                          </td>
-                      </tr>
-                      <% end %>
-                  </tbody>
-              </table>
-              
-              <br>
-              
-              <%= link_to "New Lecturer", new_lecturer_path, class: 'btn' %>
-          </div>
-      </div>
-    </div>
+<table class="lecturers-table">
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @lecturers.each do |lecturer| %>
+        <tr>
+            <td><%= lecturer.name %></td>
+            <td><%= lecturer.email %></td>
+            <td>
+            <%= link_to 'Edit', edit_lecturer_path(lecturer), class: 'btn' %>
+            <%= link_to 'Delete', lecturer, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 
-    <footer>
-        <p>&copy; 2024 College Management System. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+<%= link_to "New Lecturer", new_lecturer_path, class: 'btn' %>

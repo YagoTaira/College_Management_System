@@ -1,8 +1,12 @@
-<div id="<%= dom_id course %>" class="course-card">
-  <h3 class="course-title"><%= course.title %></h3>
-  <p class="course-description"><%= course.description %></p>
-  <div class="course-actions">
-    <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-small' %>
-    <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-small btn-danger' %>
+<div class="card mb-3">
+  <div class="card-header">
+    <h3 class="card-title"><%= course.title %></h3>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%= course.description %></p>
+    <div class="actions">
+      <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
   </div>
 </div>

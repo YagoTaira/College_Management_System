@@ -1,76 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students - College Management System</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= stylesheet_link_tag "students", media: "all" %>
-    <%= javascript_importmap_tags %>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>College Management System</h1>
-        </div>
-    </header>
+<% content_for :title, "Students" %>
+<h2>Students</h2>
 
-    <nav>
-        <ul>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Lecturers', lecturers_path %></li>
-            <li><%= link_to 'Courses', courses_path %></li>
-            <li><%= link_to 'Students', students_path %></li>
-            <li><%= link_to 'Grades', grades_path %></li>
-            <li><%= link_to 'Enrollments', enrollments_path %></li>
-            <li><%= link_to 'Attendances', attendances_path %></li>
-        </ul>
-    </nav>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
-    <div class="wrapper">
-      <div class="container">
-          <div class="content">
-              <h2>Students</h2>
-              
-              <% if notice %>
-                  <p class="notice"><%= notice %></p>
-              <% end %>
-              
-              <table class="students-table">
-                  <thead>
-                      <tr>
-                          <th>Name</th>
-                          <th>Age</th>
-                          <th>Email</th>
-                          <th colspan="2">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <% @students.each do |student| %>
-                      <tr>
-                          <td><%= student.name %></td>
-                          <td><%= student.age %></td>
-                          <td><%= student.email %></td>
-                          <td>
-                              <%= link_to 'Edit', edit_student_path(student), class: 'btn' %>
-                              <%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-                          </td>
-                      </tr>
-                      <% end %>
-                  </tbody>
-              </table>
-              
-              <br>
-              
-              <%= link_to "New Student", new_student_path, class: 'btn' %>
-          </div>
-      </div>
-    </div>
+<table class="students-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.age %></td>
+        <td><%= student.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_student_path(student), class: 'btn' %>
+          <%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-    <footer>
-        <p>&copy; 2024 College Management System. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+<br>
+
+<%= link_to 'New Student', new_student_path, class: 'btn' %>
