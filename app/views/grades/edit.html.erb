@@ -1,4 +1,11 @@
+<%# Set the page title %>
 <% content_for :title, "New Grade" %>
+
+<%# Main heading for the page %>
 <h1>Edit Grade</h1>
+
+<%# Render the grade form partial, passing the @grade object %>
 <%= render 'form', grade: @grade %>
+
+<%# Link to go back to the grades index page %>
 <%= link_to 'Back to Grades', grades_path, class: 'btn' %>

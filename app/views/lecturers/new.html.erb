@@ -1,4 +1,11 @@
+<%# Set the page title %>
 <% content_for :title, "New Lecturer" %>
+
+<%# Main heading for the page %>
 <h2>New Lecturer</h2>
+
+<%# Render the lecturer form partial, passing the @lecturer object %>
 <%= render 'form', lecturer: @lecturer %>
+
+<%# Link to go back to the lecturers index page %>
 <%= link_to 'Back to Lecturers', lecturers_path, class: 'btn' %>

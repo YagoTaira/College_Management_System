@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%# Dynamic title tag using content_for %>
     <title><%= yield :title %> - College Management System</title>
+    <%# Rails security tags %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%# Include application stylesheet %>
     <%= stylesheet_link_tag "application", media: "all" %>
+    <%# Include JavaScript with importmap %>
     <%= javascript_importmap_tags %>
 </head>
 <body>
+    <%# Header section %>
     <header>
         <div class="container">
-            <h1>College Management System Video Presentation</h1>
+            <h1>College Management System</h1>
         </div>
     </header>
-
+    
+    <%# Navigation menu %>
     <nav>
         <ul>
             <li><%= link_to 'Home', root_path %></li>
@@ -27,15 +33,18 @@
             <li><%= link_to 'Attendances', attendances_path %></li>
         </ul>
     </nav>
-
+    
+    <%# Main content wrapper %>
     <div class="wrapper">
         <div class="container">
             <div class="content">
+                <%# Yield for page-specific content %>
                 <%= yield %>
             </div>
         </div>
     </div>
-
+    
+    <%# Footer section %>
     <footer>
         <p>&copy; 2024 College Management System. All rights reserved.</p>
     </footer>

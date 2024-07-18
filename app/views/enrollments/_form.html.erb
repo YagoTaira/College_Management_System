@@ -1,8 +1,11 @@
+<%# Start of the form for creating or editing an enrollment %>
 <%= form_with(model: enrollment) do |form| %>
+  <%# Display error messages if any validation errors occur %>
   <% if enrollment.errors.any? %>
     <div class="error-message">
       <h2><%= pluralize(enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
       <ul>
+        <%# Iterate through each error message and display it %>
         <% enrollment.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -10,22 +13,27 @@
     </div>
   <% end %>
 
+  <%# Form group for selecting a student %>
   <div class="form-group">
     <%= form.label :student_id %>
     <%= form.collection_select :student_id, Student.all, :id, :name, prompt: "Select Student" %>
   </div>
 
+  <%# Form group for selecting a course %>
   <div class="form-group">
     <%= form.label :course_id %>
     <%= form.collection_select :course_id, Course.all, :id, :title, prompt: "Select Course" %>
   </div>
 
+  <%# Form group for selecting a lecturer %>
   <div class="form-group">
     <%= form.label :lecturer_id %>
     <%= form.collection_select :lecturer_id, Lecturer.all, :id, :name, prompt: "Select Lecturer" %>
   </div>
 
+  <%# Form group for the submit button %>
   <div class="form-group">
     <%= form.submit class: 'btn' %>
   </div>
+<%# End of the form %>
 <% end %>

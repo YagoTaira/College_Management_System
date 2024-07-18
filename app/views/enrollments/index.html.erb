@@ -1,10 +1,15 @@
+<%# Set the page title %>
 <% content_for :title, "Enrollments" %>
+
+<%# Main heading for the page %>
 <h2>Enrollments</h2>
 
+<%# Display notice message if present %>
 <% if notice %>
   <p class="notice"><%= notice %></p>
 <% end %>
 
+<%# Table to display enrollments %>
 <table class="enrollments-table">
   <thead>
     <tr>
@@ -15,13 +20,19 @@
     </tr>
   </thead>
   <tbody>
+    <%# Iterate through each enrollment %>
     <% @enrollments.each do |enrollment| %>
       <tr>
+        <%# Display student name %>
         <td><%= enrollment.student.name %></td>
+        <%# Display course title %>
         <td><%= enrollment.course.title %></td>
+        <%# Display lecturer name %>
         <td><%= enrollment.lecturer.name %></td>
         <td>
+          <%# Link to edit enrollment %>
           <%= link_to 'Edit', edit_enrollment_path(enrollment), class: 'btn' %>
+          <%# Link to delete enrollment with confirmation %>
           <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
         </td>
       </tr>
@@ -29,6 +40,8 @@
   </tbody>
 </table>
 
+<%# Add a line break %>
 <br>
 
+<%# Link to create a new enrollment %>
 <%= link_to 'New Enrollment', new_enrollment_path, class: 'btn' %>

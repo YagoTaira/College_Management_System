@@ -1,3 +1,8 @@
+<%# Set the page title %>
 <% content_for :title, "New Student" %>
+
+<%# Render the student form partial, passing the @student object %>
 <%= render 'form', student: @student %>
+
+<%# Link to go back to the students index page %>
 <%= link_to 'Back to Students', students_path, class: 'btn' %>

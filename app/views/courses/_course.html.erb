@@ -1,11 +1,21 @@
+<%# Start of a card component for displaying course information %>
 <div class="card mb-3">
+  <%# Card header containing the course title %>
   <div class="card-header">
     <h3 class="card-title"><%= course.title %></h3>
   </div>
+  
+  <%# Card body containing course description and action buttons %>
   <div class="card-body">
+    <%# Display course description %>
     <p class="card-text"><%= course.description %></p>
+    
+    <%# Container for action buttons %>
     <div class="actions">
+      <%# Link to edit the course %>
       <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-warning' %>
+      
+      <%# Link to delete the course with confirmation %>
       <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     </div>
   </div>

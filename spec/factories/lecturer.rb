@@ -1,6 +1,10 @@
 FactoryBot.define do
+  # Define a factory for creating Lecturer objects
   factory :lecturer do
-      name { Faker::Name.name }
-      email { Faker::Internet.email }
+    # Generate a random name for the lecturer using Faker
+    name { Faker::Name.name }
+
+    # Generate a random email for the lecturer using Faker
+    email { Faker::Internet.email }
   end
 end

@@ -1,10 +1,15 @@
+<%# Set the page title %>
 <% content_for :title, "Grades" %>
+
+<%# Main heading for the page %>
 <h2>Grades</h2>
 
+<%# Display notice message if present %>
 <% if notice %>
   <p class="notice"><%= notice %></p>
 <% end %>
 
+<%# Table to display grades %>
 <table class="grades-table">
   <thead>
     <tr>
@@ -15,18 +20,25 @@
     </tr>
   </thead>
   <tbody>
+    <%# Iterate through each grade %>
     <% @grades.each do |grade| %>
-    <tr>
-      <td><%= grade.enrollment.student.name %></td>
-      <td><%= grade.enrollment.course.title %></td>
-      <td><%= grade.score %></td>
-      <td>
-        <%= link_to 'Edit', edit_grade_path(grade), class: 'btn' %>
-        <%= link_to 'Delete', grade, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
-      </td>
-    </tr>
+      <tr>
+        <%# Display student name %>
+        <td><%= grade.enrollment.student.name %></td>
+        <%# Display course title %>
+        <td><%= grade.enrollment.course.title %></td>
+        <%# Display grade score %>
+        <td><%= grade.score %></td>
+        <td>
+          <%# Link to edit grade %>
+          <%= link_to 'Edit', edit_grade_path(grade), class: 'btn' %>
+          <%# Link to delete grade with confirmation %>
+          <%= link_to 'Delete', grade, method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
+<%# Link to create a new grade %>
 <%= link_to 'New Grade', new_grade_path, class: 'btn' %>

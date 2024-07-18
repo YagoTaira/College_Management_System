@@ -1,19 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe GradesController, type: :controller do
+  # Create test data using FactoryBot
   let(:student) { create(:student) }
   let(:course) { create(:course) }
   let(:enrollment) { create(:enrollment, student: student, course: course) }
   let(:grade) { create(:grade, enrollment: enrollment, score: 70)}
-  
+
+  # Define valid and invalid attributes for testing
   let(:valid_attributes) {
     { enrollment_id: enrollment.id, score: 70 }
   }
-
   let(:invalid_attributes) {
     { enrollment_id: nil, score: nil }
   }
 
+  # Test GET #index action
   describe "GET #index" do
     it "returns a success response" do
       grade
@@ -22,6 +24,7 @@ RSpec.describe GradesController, type: :controller do
     end
   end
 
+  # Test GET #new action
   describe "GET #new" do
     it "returns a success response" do
       get :new
@@ -29,6 +32,7 @@ RSpec.describe GradesController, type: :controller do
     end
   end
 
+  # Test POST #create action
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Grade" do
@@ -57,6 +61,7 @@ RSpec.describe GradesController, type: :controller do
     end
   end
 
+  # Test GET #edit action
   describe "GET #edit" do
     it "returns a success response" do
       get :edit, params: { id: grade.to_param }
@@ -64,6 +69,7 @@ RSpec.describe GradesController, type: :controller do
     end
   end
 
+  # Test PATCH #update action
   describe "PATCH #update" do
     context "with valid params" do
       let(:new_attributes) {
@@ -90,6 +96,7 @@ RSpec.describe GradesController, type: :controller do
     end
   end
 
+  # Test DELETE #destroy action
   describe "DELETE #destroy" do
     it "destroys the requested grade" do
       grade
