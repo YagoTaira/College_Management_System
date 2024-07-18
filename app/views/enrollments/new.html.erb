@@ -1,4 +1,11 @@
+<%# Set the page title %>
 <% content_for :title, "New Enrollment" %>
+
+<%# Main heading for the page %>
 <h1>New Enrollment</h1>
+
+<%# Render the enrollment form partial, passing the @enrollment object %>
 <%= render 'form', enrollment: @enrollment %>
+
+<%# Link to go back to the enrollments index page %>
 <%= link_to 'Back to Enrollments', enrollments_path, class: 'btn' %>

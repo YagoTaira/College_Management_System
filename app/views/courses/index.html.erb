@@ -1,15 +1,27 @@
+<%# Set the page title %>
 <% content_for :title, "Courses" %>
+
+<%# Main heading for the page %>
 <h2>Courses</h2>
 
+<%# Display notice message if present %>
 <% if notice %>
-<p class="notice"><%= notice %></p>
+  <p class="notice"><%= notice %></p>
 <% end %>
+
+<%# Add a line break %>
 <br>
+
+<%# Container for displaying courses in a grid layout %>
 <div class="courses-grid">
-    <% @courses.each do |course| %>
-        <%= render course %>
-        <br>
-    <% end %>
+  <%# Iterate through each course %>
+  <% @courses.each do |course| %>
+    <%# Render the course partial for each course %>
+    <%= render course %>
+    <%# Add a line break after each course %>
+    <br>
+  <% end %>
 </div>
 
+<%# Link to create a new course %>
 <%= link_to 'New Course', new_course_path, class: 'btn' %>

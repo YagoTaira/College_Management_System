@@ -1,4 +1,11 @@
+<%# Set the page title %>
 <% content_for :title, "New Attendance" %>
+
+<%# Main heading for the page %>
 <h1>New Attendance</h1>
+
+<%# Render the attendance form partial, passing the @attendance object %>
 <%= render 'form', attendance: @attendance %>
+
+<%# Link to go back to the attendances index page %>
 <%= link_to 'Back to Attendances', attendances_path, class: 'btn' %>

@@ -1,8 +1,11 @@
+<%# Start of the form for creating or editing a course %>
 <%= form_with(model: course, local: true) do |form| %>
+  <%# Display error messages if any validation errors occur %>
   <% if course.errors.any? %>
     <div class="error-messages">
       <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
       <ul>
+        <%# Iterate through each error message and display it %>
         <% course.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -10,17 +13,21 @@
     </div>
   <% end %>
 
+  <%# Form group for the course title %>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
 
+  <%# Form group for the course description %>
   <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, class: 'form-control' %>
   </div>
 
+  <%# Form group for the submit button %>
   <div class="form-group">
     <%= form.submit class: 'btn btn-primary' %>
   </div>
+<%# End of the form %>
 <% end %>

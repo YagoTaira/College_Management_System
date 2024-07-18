@@ -1,8 +1,11 @@
+<%# Start of the form for creating or editing a grade %>
 <%= form_with(model: grade) do |form| %>
+  <%# Display error messages if any validation errors occur %>
   <% if grade.errors.any? %>
     <div class="error-message">
       <h2><%= pluralize(grade.errors.count, "error") %> prohibited this grade from being saved:</h2>
       <ul>
+        <%# Iterate through each error and display its message %>
         <% grade.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -10,17 +13,21 @@
     </div>
   <% end %>
 
+  <%# Form group for selecting an enrollment %>
   <div class="form-group">
     <%= form.label :enrollment_id, "Enrollment" %>
     <%= form.collection_select :enrollment_id, Enrollment.all, :id, :to_s, prompt: "Select Enrollment" %>
   </div>
 
+  <%# Form group for entering the grade score %>
   <div class="form-group">
     <%= form.label :score, "Grade Score" %>
     <%= form.number_field :score, in: 0..100 %>
   </div>
-  
+
+  <%# Form group for the submit button %>
   <div class="form-group">
     <%= form.submit class: 'btn' %>
   </div>
+<%# End of the form %>
 <% end %>

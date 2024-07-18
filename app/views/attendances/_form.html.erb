@@ -1,8 +1,11 @@
+<%# Start of the form for creating or editing an attendance record %>
 <%= form_with(model: attendance) do |form| %>
+  <%# Display error messages if any validation errors occur %>
   <% if attendance.errors.any? %>
     <div class="error-message">
       <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
       <ul>
+        <%# Iterate through each error and display its message %>
         <% attendance.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -10,22 +13,27 @@
     </div>
   <% end %>
 
+  <%# Form group for selecting an enrollment %>
   <div class="form-group">
     <%= form.label :enrollment_id, "Enrollment" %>
     <%= form.collection_select :enrollment_id, Enrollment.all, :id, :to_s, prompt: "Select Enrollment" %>
   </div>
 
+  <%# Form group for selecting a date %>
   <div class="form-group">
     <%= form.label :date, "Date" %>
     <%= form.date_select :date, order: [:day, :month, :year], end_year: Date.today.year %>
   </div>
 
+  <%# Form group for selecting attendance status %>
   <div class="form-group">
     <%= form.label :status, "Status" %>
     <%= form.select :status, ["Present", "Absent"] %>
   </div>
-  
+
+  <%# Form group for the submit button %>
   <div class="form-group">
     <%= form.submit class: 'btn' %>
   </div>
+<%# End of the form %>
 <% end %>

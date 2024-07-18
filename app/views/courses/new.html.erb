@@ -1,4 +1,11 @@
+<%# Set the page title %>
 <% content_for :title, "New Course" %>
+
+<%# Main heading for the page %>
 <h1>New Course</h1>
+
+<%# Render the course form partial, passing the @course object %>
 <%= render 'form', course: @course %>
+
+<%# Link to go back to the courses index page %>
 <%= link_to 'Back to Courses', courses_path, class: 'btn' %>

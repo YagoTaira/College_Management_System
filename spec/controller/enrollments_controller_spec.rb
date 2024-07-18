@@ -1,18 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe EnrollmentsController, type: :controller do
+  # Create test data using FactoryBot
   let(:student) { create(:student) }
   let(:course) { create(:course) }
   let(:lecturer) { create(:lecturer) }
 
+  # Define valid and invalid attributes for testing
   let(:valid_attributes) {
     { student_id: student.id, course_id: course.id, lecturer_id: lecturer.id }
   }
-
   let(:invalid_attributes) {
     { student_id: nil, course_id: nil, lecturer_id: nil }
   }
 
+  # Test GET #index action
   describe "GET #index" do
     it "returns a success response" do
       create(:enrollment, student: student, course: course, lecturer: lecturer)
@@ -21,6 +23,7 @@ RSpec.describe EnrollmentsController, type: :controller do
     end
   end
 
+  # Test GET #new action
   describe "GET #new" do
     it "returns a success response" do
       get :new
@@ -28,6 +31,7 @@ RSpec.describe EnrollmentsController, type: :controller do
     end
   end
 
+  # Test POST #create action
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Enrollment" do
@@ -56,6 +60,7 @@ RSpec.describe EnrollmentsController, type: :controller do
     end
   end
 
+  # Test GET #edit action
   describe "GET #edit" do
     it "returns a success response" do
       enrollment = create(:enrollment, student: student, course: course, lecturer: lecturer)
@@ -64,6 +69,7 @@ RSpec.describe EnrollmentsController, type: :controller do
     end
   end
 
+  # Test PATCH #update action
   describe "PATCH #update" do
     let(:new_student) { create(:student) }
     let(:new_course) { create(:course) }
@@ -99,6 +105,7 @@ RSpec.describe EnrollmentsController, type: :controller do
     end
   end
 
+  # Test DELETE #destroy action
   describe "DELETE #destroy" do
     it "destroys the requested enrollment" do
       enrollment = create(:enrollment, student: student, course: course, lecturer: lecturer)

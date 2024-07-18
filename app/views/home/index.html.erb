@@ -1,23 +1,32 @@
+<%# Set the page title %>
 <% content_for :title, "Dashboard" %>
+
+<%# Main heading for the page %>
 <h2>Dashboard</h2>
 
+<%# Table to display grades information %>
 <table class="grades-table">
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Course</th>
-            <th>Lecturer</th>
-            <th>Grade</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @grades.each do |grade| %>
-        <tr>
-            <td><%= grade.enrollment.student.name %></td>
-            <td><%= grade.enrollment.course.title %></td>
-            <td><%= grade.enrollment.lecturer.name %></td>
-            <td><%= grade.score %></td>
-        </tr>
-        <% end %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Lecturer</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%# Iterate through each grade %>
+    <% @grades.each do |grade| %>
+      <tr>
+        <%# Display student name %>
+        <td><%= grade.enrollment.student.name %></td>
+        <%# Display course title %>
+        <td><%= grade.enrollment.course.title %></td>
+        <%# Display lecturer name %>
+        <td><%= grade.enrollment.lecturer.name %></td>
+        <%# Display grade score %>
+        <td><%= grade.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

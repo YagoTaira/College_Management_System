@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe CoursesController, type: :controller do
+  # Define valid and invalid attributes for testing
   let(:valid_attributes) {
     attributes_for(:course)
   }
-
   let(:invalid_attributes) {
     { title: nil, description: nil }
   }
 
+  # Test GET #index action
   describe "GET #index" do
     it "returns a success response" do
       create(:course)
@@ -17,6 +18,7 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  # Test GET #new action
   describe "GET #new" do
     it "returns a success response" do
       get :new
@@ -24,6 +26,7 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  # Test POST #create action
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Course" do
@@ -52,6 +55,7 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  # Test GET #edit action
   describe "GET #edit" do
     it "returns a success response" do
       course = create(:course)
@@ -60,6 +64,7 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  # Test PATCH #update action
   describe "PATCH #update" do
     context "with valid params" do
       let(:new_attributes) {
@@ -90,6 +95,7 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  # Test DELETE #destroy action
   describe "DELETE #destroy" do
     it "destroys the requested course" do
       course = create(:course)

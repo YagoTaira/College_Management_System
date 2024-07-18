@@ -3,72 +3,72 @@ version: 2.1
 workflows:
   build_test_deploy:
     jobs:
-      - build
-      - test:
+      - build  # First job to build the project
+      - test:  # Second job to test the project, depends on build job
           requires:
-            - build
-      - deploy:
+            - build  # Ensure build is successful before running tests
+      - deploy:  # Third job to deploy the project, depends on test job
           requires:
-            - test
+            - test  # Ensure tests are successful before deploying
           filters:
             branches:
-              only: main
+              only: main  # Only run deploy job on the main branch
 
 jobs:
   build:
-    working_directory: ~/College_Management_System
+    working_directory: ~/College_Management_System  # Working directory for the build job
     docker:
-      - image: cimg/ruby:3.3.1-node
+      - image: cimg/ruby:3.3.1-node  # Docker image with Ruby and Node.js
     steps:
-      - checkout
+      - checkout  # Check out the code from the repository
       - run:
-          name: Install Dependencies
+          name: Install Dependencies  # Install Ruby and JavaScript dependencies
           command: |
-            bundle install
-            yarn install
+            bundle install  # Install Ruby gems
+            yarn install  # Install JavaScript packages
 
   test:
-    working_directory: ~/College_Management_System
+    working_directory: ~/College_Management_System  # Working directory for the test job
     docker:
-      - image: cimg/ruby:3.3.1-browsers
+      - image: cimg/ruby:3.3.1-browsers  # Docker image with Ruby and browser support
     steps:
-      - checkout
+      - checkout  # Check out the code from the repository
       - run:
-          name: Install Chrome and ChromeDriver
+          name: Install Chrome and ChromeDriver  # Install Chrome and ChromeDriver for browser tests
           command: |
-            sudo apt-get update
-            sudo apt-get install -y wget libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev fonts-liberation libatspi2.0-0 libcups2 libnspr4 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo apt-get install -f -y
-            google-chrome --version
-            CHROMEDRIVER_VERSION="126.0.6478.126"
-            wget "https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip"
-            unzip chromedriver-linux64.zip
-            sudo mv chromedriver-linux64/chromedriver /usr/bin/
-            sudo chmod +x /usr/bin/chromedriver
-            chromedriver --version
+            sudo apt-get update  # Update package lists
+            sudo apt-get install -y wget libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev fonts-liberation libatspi2.0-0 libcups2 libnspr4 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 xdg-utils  # Install required packages
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb  # Download Chrome
+            sudo dpkg -i google-chrome-stable_current_amd64.deb  # Install Chrome
+            sudo apt-get install -f -y  # Fix missing dependencies
+            google-chrome --version  # Check Chrome version
+            CHROMEDRIVER_VERSION="126.0.6478.126"  # Set ChromeDriver version
+            wget "https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip"  # Download ChromeDriver
+            unzip chromedriver-linux64.zip  # Unzip ChromeDriver
+            sudo mv chromedriver-linux64/chromedriver /usr/bin/  # Move ChromeDriver to PATH
+            sudo chmod +x /usr/bin/chromedriver  # Make ChromeDriver executable
+            chromedriver --version  # Check ChromeDriver version
       - run:
-          name: Install Dependencies
+          name: Install Dependencies  # Install Ruby and JavaScript dependencies
           command: |
-            bundle install
-            yarn install
+            bundle install  # Install Ruby gems
+            yarn install  # Install JavaScript packages
       - run:
-          name: Run tests
-          command: bundle exec rspec
+          name: Run tests  # Run RSpec tests
+          command: bundle exec rspec  # Execute RSpec tests
 
   deploy:
     docker:
-      - image: cimg/ruby:3.3.1-node
+      - image: cimg/ruby:3.3.1-node  # Docker image with Ruby and Node.js
     steps:
-      - checkout
+      - checkout  # Check out the code from the repository
       - run:
-          name: Deploy Application
+          name: Deploy Application  # Deploy the application
           command: |
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
-            sudo rm -rf College_Management_System/;
-            sudo git clone https://github.com/YagoTaira/College_Management_System.git;
-            cd College_Management_System;
-            sudo dos2unix deploy.sh;
-            source deploy.sh;
+            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "  # SSH into the EC2 instance
+            sudo rm -rf College_Management_System/;  # Remove existing project directory
+            sudo git clone https://github.com/YagoTaira/College_Management_System.git;  # Clone the project from GitHub
+            cd College_Management_System;  # Change to the project directory
+            sudo dos2unix deploy.sh;  # Convert deploy script to Unix format
+            source deploy.sh;  # Execute the deploy script
             "
