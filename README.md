@@ -28,7 +28,7 @@ This is a College Management System implemented using Ruby on Rails. The applica
 - Rails 7.x
 - Node.js
 - Yarn
-- PostgreSQL
+- SQLite3
 
 ### Installation
 
